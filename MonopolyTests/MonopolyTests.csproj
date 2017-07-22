@@ -54,7 +54,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Dice\DiceRollerTests.cs" />
+    <Compile Include="Dice\DieTests.cs" />
+    <Compile Include="MovementServiceTests.cs" />
+    <Compile Include="PlayerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
