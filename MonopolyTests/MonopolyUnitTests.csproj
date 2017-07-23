@@ -56,9 +56,12 @@
   <ItemGroup>
     <Compile Include="Dice\DiceRollerTests.cs" />
     <Compile Include="Dice\DieTests.cs" />
+    <Compile Include="Events\EventFactoryTests.cs" />
+    <Compile Include="Events\NopEventTests.cs" />
+    <Compile Include="Events\PassGoEventTests.cs" />
     <Compile Include="Game\GameRunnerTests.cs" />
     <Compile Include="Game\GameValidatorTests.cs" />
-    <Compile Include="MovementServiceTests.cs" />
+    <Compile Include="Movement\MovementServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Random\RandomizerTests.cs" />
     <Compile Include="Random\RandomTests.cs" />

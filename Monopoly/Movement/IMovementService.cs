@@ -4,6 +4,6 @@ namespace Monopoly.Movement
 {
     public interface IMovementService
     {
-        void MoveToken(Token token, Int32 spacesToMove);
+        void MovePlayer(Player player, Int32 spacesToMove);
     }
 }

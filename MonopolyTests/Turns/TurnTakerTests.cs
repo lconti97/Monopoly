@@ -12,7 +12,6 @@ namespace MonopolyTests.Turns
     {
         private Mock<IDiceRoller> mockDiceRoller;
         private Mock<IMovementService> mockMovementService;
-        private Token token;
         private Player player;
         private TurnTaker turnTaker;
 
@@ -20,8 +19,7 @@ namespace MonopolyTests.Turns
         {
             mockDiceRoller = new Mock<IDiceRoller>();
             mockMovementService = new Mock<IMovementService>();
-            token = new Token();
-            player = new Player { Token = token };
+            player = new Player();
             turnTaker = new TurnTaker(mockDiceRoller.Object, mockMovementService.Object);
         }
 
@@ -41,7 +39,7 @@ namespace MonopolyTests.Turns
 
             turnTaker.TakeTurn(player);
 
-            mockMovementService.Verify(s => s.MoveToken(player.Token, diceRollTotal));
+            mockMovementService.Verify(s => s.MovePlayer(player, diceRollTotal));
             mockDiceRoller.VerifyAll();
         }
 

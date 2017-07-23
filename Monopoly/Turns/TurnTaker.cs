@@ -17,7 +17,7 @@ namespace Monopoly.Turns
         public void TakeTurn(Player player)
         {
             var diceRoll = diceRoller.RollDice();
-            movementService.MoveToken(player.Token, diceRoll);
+            movementService.MovePlayer(player, diceRoll);
             player.TurnsTaken++;
         }
     }
