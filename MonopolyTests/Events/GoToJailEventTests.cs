@@ -17,11 +17,8 @@ namespace MonopolyTests.Events
         {
             jailSpaceIndex = 3;
             player = new Player();
-            gameBoard = new GameBoard
-            {
-                JailSpaceLocation = jailSpaceIndex
-            };
-            goToJailEvent = new GoToJailEvent();
+            gameBoard = new GameBoard();
+            goToJailEvent = new GoToJailEvent(jailSpaceIndex);
         }
 
         [TestMethod]

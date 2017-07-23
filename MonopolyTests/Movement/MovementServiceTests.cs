@@ -14,35 +14,35 @@ namespace MonopolyTests.Movement
     {
         private Int32 numberOfSpaces;
         private GameBoard gameBoard;
-        private Mock<IEventFactory> mockEventFactory;
-        private Mock<IEvent> mockEvent;
+        private Mock<INopEvent> mockEnterSpaceEvent;
+        private Mock<INopEvent> mockLandOnSpaceEvent;
         private Player player;
         private MovementService movementService;
 
         public MovementServiceTests()
         {
             numberOfSpaces = 40;
-            gameBoard = CreateGameBoardWithGenericSpaces(numberOfSpaces);
-            mockEventFactory = new Mock<IEventFactory>();
-            mockEvent = new Mock<IEvent>();
+            gameBoard = new GameBoard();
+            mockEnterSpaceEvent = new Mock<INopEvent>();
+            mockLandOnSpaceEvent = new Mock<INopEvent>();
             player = new Player();
-            movementService = new MovementService(gameBoard, mockEventFactory.Object);
+            movementService = new MovementService(gameBoard);
         }
 
         [TestInitialize]
         public void Setup()
         {
-            mockEventFactory.Setup(f => f.CreateEnterSpaceEvent(It.IsAny<ISpace>())).Returns(mockEvent.Object);
+            gameBoard.Spaces = CreateGenericSpaces(numberOfSpaces);
         }
 
-        private GameBoard CreateGameBoardWithGenericSpaces(Int32 numberOfSpaces)
+        private IEnumerable<ISpace> CreateGenericSpaces(Int32 numberOfSpaces)
         {
             var spaces = new List<ISpace>();
 
             for (int i = 0; i < numberOfSpaces; i++)
-                spaces.Add(new GenericSpace());
+                spaces.Add(new GenericSpace(mockEnterSpaceEvent.Object, mockLandOnSpaceEvent.Object));
 
-            return new GameBoard { Spaces = spaces };
+            return spaces;
         }
 
         [TestMethod]
@@ -71,14 +71,23 @@ namespace MonopolyTests.Movement
         }
 
         [TestMethod]
-        public void MovePlayerCallsCreateOnEnterSpaceEventForEachSpaceThePlayerEnters()
+        public void MovePlayerCallsActOnEnterSpaceEventForEachSpaceThePlayerEnters()
         {
             var spacesToMove = 3;
 
             movementService.MovePlayer(player, spacesToMove);
 
-            mockEventFactory.Verify(d => d.CreateEnterSpaceEvent(It.IsAny<ISpace>()), Times.Exactly(spacesToMove));
-            mockEvent.Verify(e => e.Act(player, gameBoard), Times.Exactly(spacesToMove));
+            mockEnterSpaceEvent.Verify(e => e.Act(player, gameBoard), Times.Exactly(spacesToMove));
+        }
+
+        [TestMethod]
+        public void MovePlayerCallsActOnLastSpaceLandOnEvent()
+        {
+            var spacesToMove = 3;
+
+            movementService.MovePlayer(player, spacesToMove);
+
+            mockLandOnSpaceEvent.Verify(e => e.Act(player, gameBoard), Times.Once());
         }
     }
 }

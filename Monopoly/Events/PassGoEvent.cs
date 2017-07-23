@@ -2,13 +2,18 @@
 
 namespace Monopoly.Events
 {
-    public class PassGoEvent : IEvent
+    public class PassGoEvent : IPassGoEvent
     {
-        public const Int32 PassGoPay = 200;
+        private Int32 passGoPay;
+
+        public PassGoEvent(Int32 passGoPay)
+        {
+            this.passGoPay = passGoPay;
+        }
 
         public void Act(Player player, GameBoard gameBoard)
         {
-            player.Balance += PassGoPay;
+            player.Balance += passGoPay;
         }
     }
 }

@@ -1,31 +1,37 @@
 ﻿using System;
 using System.Linq;
-using Monopoly.Events;
+using Monopoly.Spaces;
 
 namespace Monopoly.Movement
 {
     public class MovementService : IMovementService
     {
         private GameBoard gameBoard;
-        private IEventFactory eventFactory;
 
-        public MovementService(GameBoard gameBoard, IEventFactory eventFactory)
+        public MovementService(GameBoard gameBoard)
         {
             this.gameBoard = gameBoard;
-            this.eventFactory = eventFactory;
         }
 
         public void MovePlayer(Player player, Int32 spacesToMove)
         {
             for (int i = 0; i < spacesToMove; i++)
                 AdvancePlayerByOneSpace(player);
+
+            var currentSpace = GetCurrentSpace(player, gameBoard);
+            currentSpace.LandOnSpaceEvent.Act(player, gameBoard);
+        }
+
+        private ISpace GetCurrentSpace(Player player, GameBoard gameBoard)
+        {
+            return gameBoard.Spaces.ElementAt(player.Location);
         }
 
         private void AdvancePlayerByOneSpace(Player player)
         {
             player.Location = (player.Location + 1) % gameBoard.Spaces.Count();
-            var currentSpace = gameBoard.Spaces.ElementAt(player.Location);
-            var enterSpaceEvent = eventFactory.CreateEnterSpaceEvent(currentSpace);
+            var currentSpace = GetCurrentSpace(player, gameBoard);
+            var enterSpaceEvent = currentSpace.EnterSpaceEvent;
             enterSpaceEvent.Act(player, gameBoard);
         }
     }

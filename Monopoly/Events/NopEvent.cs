@@ -1,6 +1,6 @@
 ﻿namespace Monopoly.Events
 {
-    public class NopEvent : IEvent
+    public class NopEvent : INopEvent
     {
         public void Act(Player player, GameBoard gameBoard)
         { }
