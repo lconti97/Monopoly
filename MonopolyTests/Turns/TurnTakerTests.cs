@@ -1,30 +1,34 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Monopoly;
 using Monopoly.Dice;
+using Monopoly.Movement;
+using Monopoly.Turns;
 using Moq;
 
-namespace MonopolyTests
+namespace MonopolyTests.Turns
 {
     [TestClass]
-    public class PlayerTests
+    public class TurnTakerTests
     {
         private Mock<IDiceRoller> mockDiceRoller;
         private Mock<IMovementService> mockMovementService;
         private Token token;
         private Player player;
+        private TurnTaker turnTaker;
 
-        public PlayerTests()
+        public TurnTakerTests()
         {
             mockDiceRoller = new Mock<IDiceRoller>();
             mockMovementService = new Mock<IMovementService>();
             token = new Token();
-            player = new Player(mockDiceRoller.Object, mockMovementService.Object, token);
+            player = new Player { Token = token };
+            turnTaker = new TurnTaker(mockDiceRoller.Object, mockMovementService.Object);
         }
 
         [TestMethod]
         public void TakeTurnRollsDice()
         {
-            player.TakeTurn();
+            turnTaker.TakeTurn(player);
 
             mockDiceRoller.Verify(d => d.RollDice(), Times.Once());
         }
@@ -35,10 +39,18 @@ namespace MonopolyTests
             var diceRollTotal = 6;
             mockDiceRoller.Setup(r => r.RollDice()).Returns(diceRollTotal);
 
-            player.TakeTurn();
+            turnTaker.TakeTurn(player);
 
-            mockMovementService.Verify(s => s.MoveToken(token, diceRollTotal));
+            mockMovementService.Verify(s => s.MoveToken(player.Token, diceRollTotal));
             mockDiceRoller.VerifyAll();
+        }
+
+        [TestMethod]
+        public void TakeTurnUpdatesPlayerTurnsTaken()
+        {
+            turnTaker.TakeTurn(player);
+
+            Assert.AreEqual(1, player.TurnsTaken);
         }
     }
 }

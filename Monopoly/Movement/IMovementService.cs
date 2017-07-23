@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Monopoly
+namespace Monopoly.Movement
 {
     public interface IMovementService
     {

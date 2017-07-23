@@ -44,10 +44,14 @@
     <Compile Include="Dice\Die.cs" />
     <Compile Include="Dice\IDiceRoller.cs" />
     <Compile Include="Dice\IDie.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="IMovementService.cs" />
-    <Compile Include="IPlayer.cs" />
-    <Compile Include="MovementService.cs" />
+    <Compile Include="Game\Game.cs" />
+    <Compile Include="Game\GameRunner.cs" />
+    <Compile Include="Game\GameValidator.cs" />
+    <Compile Include="Game\IGameRunner.cs" />
+    <Compile Include="Game\IGameValidator.cs" />
+    <Compile Include="Movement\IMovementService.cs" />
+    <Compile Include="Turns\ITurnTaker.cs" />
+    <Compile Include="Movement\MovementService.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Random\IRandomizer.cs" />
@@ -55,6 +59,7 @@
     <Compile Include="Random\Random.cs" />
     <Compile Include="Random\Randomizer.cs" />
     <Compile Include="Token.cs" />
+    <Compile Include="Turns\TurnTaker.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

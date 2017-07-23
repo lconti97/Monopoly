@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Monopoly;
+using Monopoly.Movement;
 
 namespace MonopolyTests
 {
