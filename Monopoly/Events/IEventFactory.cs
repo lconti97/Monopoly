@@ -4,6 +4,6 @@ namespace Monopoly.Events
 {
     public interface IEventFactory
     {
-        IEvent CreateEnterSpaceEvent(Player player, ISpace space);
+        IEvent CreateEnterSpaceEvent(ISpace space);
     }
 }

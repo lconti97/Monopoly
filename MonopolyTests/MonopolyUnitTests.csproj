@@ -57,6 +57,7 @@
     <Compile Include="Dice\DiceRollerTests.cs" />
     <Compile Include="Dice\DieTests.cs" />
     <Compile Include="Events\EventFactoryTests.cs" />
+    <Compile Include="Events\GoToJailEventTests.cs" />
     <Compile Include="Events\NopEventTests.cs" />
     <Compile Include="Events\PassGoEventTests.cs" />
     <Compile Include="Game\GameRunnerTests.cs" />

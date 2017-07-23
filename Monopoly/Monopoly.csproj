@@ -45,6 +45,7 @@
     <Compile Include="Dice\IDiceRoller.cs" />
     <Compile Include="Dice\IDie.cs" />
     <Compile Include="Events\EventFactory.cs" />
+    <Compile Include="Events\GoToJailEvent.cs" />
     <Compile Include="Events\IEvent.cs" />
     <Compile Include="Events\IEventFactory.cs" />
     <Compile Include="Events\NopEvent.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Movement\IMovementService.cs" />
     <Compile Include="Spaces\GenericSpace.cs" />
     <Compile Include="Spaces\GoSpace.cs" />
+    <Compile Include="Spaces\GoToJailSpace.cs" />
     <Compile Include="Spaces\ISpace.cs" />
     <Compile Include="Turns\ITurnTaker.cs" />
     <Compile Include="Movement\MovementService.cs" />

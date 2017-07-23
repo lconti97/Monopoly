@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Monopoly.Spaces;
 
 namespace Monopoly
@@ -6,5 +7,6 @@ namespace Monopoly
     public class GameBoard
     {
         public IEnumerable<ISpace> Spaces { get; set; }
+        public Int32 JailSpaceLocation { get; set; }
     }
 }

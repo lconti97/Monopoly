@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Monopoly;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Monopoly.Events;
 using Monopoly.Spaces;
 
@@ -13,19 +7,17 @@ namespace MonopolyTests.Events
     [TestClass]
     public class EventFactoryTests
     {
-        private Player player;
         private EventFactory eventDispatcher;
 
         public EventFactoryTests()
         {
-            player = new Player();
             eventDispatcher = new EventFactory();
         }
 
         [TestMethod]
         public void CreateEnterSpaceEventForGoSpaceCreatesPassGoEvent()
         {
-            var resultEvent = eventDispatcher.CreateEnterSpaceEvent(player, new GoSpace());
+            var resultEvent = eventDispatcher.CreateEnterSpaceEvent(new GoSpace());
 
             Assert.IsInstanceOfType(resultEvent, typeof(PassGoEvent));
         }
@@ -33,7 +25,23 @@ namespace MonopolyTests.Events
         [TestMethod]
         public void CreateEnterSpaceEventForGenericSpaceCreatesNopEvent()
         {
-            var resultEvent = eventDispatcher.CreateEnterSpaceEvent(player, new GenericSpace());
+            var resultEvent = eventDispatcher.CreateEnterSpaceEvent(new GenericSpace());
+
+            Assert.IsInstanceOfType(resultEvent, typeof(NopEvent));
+        }
+
+        [TestMethod]
+        public void CreateLandOnEventForGoToJailSpaceCreatesGoToJailEvent()
+        {
+            var resultEvent = eventDispatcher.CreateLandOnSpaceEvent(new GoToJailSpace());
+
+            Assert.IsInstanceOfType(resultEvent, typeof(GoToJailEvent));
+        }
+        
+        [TestMethod]
+        public void CreateLandOnEventForGenericSpaceCreatesNopEvent()
+        {
+            var resultEvent = eventDispatcher.CreateLandOnSpaceEvent(new GenericSpace());
 
             Assert.IsInstanceOfType(resultEvent, typeof(NopEvent));
         }

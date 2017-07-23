@@ -13,13 +13,13 @@ namespace MonopolyTests.Events
         public PassGoEventTests()
         {
             player = new Player();
-            passGoEvent = new PassGoEvent(player);
+            passGoEvent = new PassGoEvent();
         }
 
         [TestMethod]
         public void ActIncreasesPlayerBalanceByPassGoPay()
         {
-            passGoEvent.Act();
+            passGoEvent.Act(player, null);
 
             Assert.AreEqual(PassGoEvent.PassGoPay, player.Balance);
         }

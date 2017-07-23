@@ -32,7 +32,7 @@ namespace MonopolyTests.Movement
         [TestInitialize]
         public void Setup()
         {
-            mockEventFactory.Setup(f => f.CreateEnterSpaceEvent(It.IsAny<Player>(), It.IsAny<ISpace>())).Returns(mockEvent.Object);
+            mockEventFactory.Setup(f => f.CreateEnterSpaceEvent(It.IsAny<ISpace>())).Returns(mockEvent.Object);
         }
 
         private GameBoard CreateGameBoardWithGenericSpaces(Int32 numberOfSpaces)
@@ -77,8 +77,8 @@ namespace MonopolyTests.Movement
 
             movementService.MovePlayer(player, spacesToMove);
 
-            mockEventFactory.Verify(d => d.CreateEnterSpaceEvent(player, It.IsAny<ISpace>()), Times.Exactly(spacesToMove));
-            mockEvent.Verify(e => e.Act(), Times.Exactly(spacesToMove));
+            mockEventFactory.Verify(d => d.CreateEnterSpaceEvent(It.IsAny<ISpace>()), Times.Exactly(spacesToMove));
+            mockEvent.Verify(e => e.Act(player, gameBoard), Times.Exactly(spacesToMove));
         }
     }
 }

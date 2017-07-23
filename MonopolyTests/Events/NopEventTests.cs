@@ -16,7 +16,7 @@ namespace MonopolyTests.Events
         [TestMethod]
         public void ActIsImplemented()
         {
-            nopEvent.Act();
+            nopEvent.Act(null, null);
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IEvent
     {
-        void Act();
+        void Act(Player player, GameBoard gameBoard);
     }
 }

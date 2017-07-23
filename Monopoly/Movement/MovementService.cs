@@ -7,12 +7,12 @@ namespace Monopoly.Movement
     public class MovementService : IMovementService
     {
         private GameBoard gameBoard;
-        private IEventFactory eventDispatcher;
+        private IEventFactory eventFactory;
 
-        public MovementService(GameBoard gameBoard, IEventFactory eventDispatcher)
+        public MovementService(GameBoard gameBoard, IEventFactory eventFactory)
         {
             this.gameBoard = gameBoard;
-            this.eventDispatcher = eventDispatcher;
+            this.eventFactory = eventFactory;
         }
 
         public void MovePlayer(Player player, Int32 spacesToMove)
@@ -25,8 +25,8 @@ namespace Monopoly.Movement
         {
             player.Location = (player.Location + 1) % gameBoard.Spaces.Count();
             var currentSpace = gameBoard.Spaces.ElementAt(player.Location);
-            var enterSpaceEvent = eventDispatcher.CreateEnterSpaceEvent(player, currentSpace);
-            enterSpaceEvent.Act();
+            var enterSpaceEvent = eventFactory.CreateEnterSpaceEvent(currentSpace);
+            enterSpaceEvent.Act(player, gameBoard);
         }
     }
 }
