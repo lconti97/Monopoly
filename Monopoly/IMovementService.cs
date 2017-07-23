@@ -4,6 +4,6 @@ namespace Monopoly
 {
     public interface IMovementService
     {
-        void MovePlayer(IPlayer player, Int32 spacesToMove);
+        void MoveToken(Token token, Int32 spacesToMove);
     }
 }

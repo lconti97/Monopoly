@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Monopoly;
-using Moq;
 
 namespace MonopolyTests
 {
@@ -9,13 +8,13 @@ namespace MonopolyTests
     public class MovementServiceTests
     {
         private Int32 numberOfSpacesOnBoard;
-        private Mock<IPlayer> mockPlayer;
+        private Token token;
         private MovementService movementService;
 
         public MovementServiceTests()
         {
             numberOfSpacesOnBoard = 40;
-            mockPlayer = new Mock<IPlayer>();
+            token = new Token();
             movementService = new MovementService(numberOfSpacesOnBoard);
         }
 
@@ -23,26 +22,25 @@ namespace MonopolyTests
         public void MovePlayerSevenSpaces()
         {
             var initialLocation = 0;
-            mockPlayer.Setup(p => p.Location).Returns(initialLocation);
+            token.Location = initialLocation;
             var spacesToMove = 7;
 
-            movementService.MovePlayer(mockPlayer.Object, spacesToMove);
+            movementService.MoveToken(token, spacesToMove);
 
-            mockPlayer.VerifySet(p => p.Location = spacesToMove);
-            mockPlayer.VerifyAll();
+            Assert.AreEqual(spacesToMove, token.Location);
         }
 
         [TestMethod]
         public void MovePlayerOnLastSpaceSixSpaces()
         {
             var initialLocation = numberOfSpacesOnBoard - 1;
-            mockPlayer.Setup(p => p.Location).Returns(initialLocation);
+            token.Location = initialLocation;
             var spacesToMove = 6;
 
-            movementService.MovePlayer(mockPlayer.Object, spacesToMove);
+            movementService.MoveToken(token, spacesToMove);
 
-            mockPlayer.VerifySet(p => p.Location = spacesToMove - 1);
-            mockPlayer.VerifyAll();
+            var expectedLocation = spacesToMove - 1;
+            Assert.AreEqual(expectedLocation, token.Location);
         }
     }
 }

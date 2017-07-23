@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monopoly", "Monopoly\Monopoly.csproj", "{79927421-F9AE-4D64-AD76-87E1EBD65E81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonopolyTests", "MonopolyTests\MonopolyTests.csproj", "{579794B9-5109-4492-80C7-DAC292866658}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonopolyUnitTests", "MonopolyTests\MonopolyUnitTests.csproj", "{579794B9-5109-4492-80C7-DAC292866658}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

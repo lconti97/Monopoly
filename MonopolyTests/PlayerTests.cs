@@ -10,13 +10,15 @@ namespace MonopolyTests
     {
         private Mock<IDiceRoller> mockDiceRoller;
         private Mock<IMovementService> mockMovementService;
+        private Token token;
         private Player player;
 
         public PlayerTests()
         {
             mockDiceRoller = new Mock<IDiceRoller>();
             mockMovementService = new Mock<IMovementService>();
-            player = new Player(mockDiceRoller.Object, mockMovementService.Object);
+            token = new Token();
+            player = new Player(mockDiceRoller.Object, mockMovementService.Object, token);
         }
 
         [TestMethod]
@@ -28,32 +30,15 @@ namespace MonopolyTests
         }
 
         [TestMethod]
-        public void PlayerLocationStartsAtZero()
+        public void TakeTurnMovesTokenBasedOnDieRoll()
         {
-            Assert.AreEqual(0, player.Location);
-        }
-
-        [TestMethod]
-        public void TakeTurnWhenDiceRollSevenAdvancesLocationBySeven()
-        {
-            var diceRoll = 7;
-            mockDiceRoller.Setup(d => d.RollDice()).Returns(diceRoll).Verifiable();
+            var diceRollTotal = 6;
+            mockDiceRoller.Setup(r => r.RollDice()).Returns(diceRollTotal);
 
             player.TakeTurn();
 
-            mockDiceRoller.Verify();
-            mockMovementService.Verify(s => s.MovePlayer(player, diceRoll), Times.Once());
-        }
-
-        [TestMethod]
-        public void TakeTurnGivenPlayerStartsOnLastSpaceWhenDiceRollSixEndsPlayerOnLocationFive()
-        {
-            var diceRoll = 6;
-            mockDiceRoller.Setup(d => d.RollDice()).Returns(diceRoll).Verifiable();
-
-            player.TakeTurn();
-
-            mockMovementService.Verify(s => s.MovePlayer(player, diceRoll), Times.Once());
+            mockMovementService.Verify(s => s.MoveToken(token, diceRollTotal));
+            mockDiceRoller.VerifyAll();
         }
     }
 }

@@ -1,10 +1,7 @@
-﻿using System;
-
-namespace Monopoly
+﻿namespace Monopoly
 {
     public interface IPlayer
     {
-        Int32 Location { get; set; }
         void TakeTurn();
     }
 }

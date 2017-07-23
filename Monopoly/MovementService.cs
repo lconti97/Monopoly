@@ -11,9 +11,9 @@ namespace Monopoly
             this.numberOfSpacesOnBoard = numberOfSpacesOnBoard;
         }
 
-        public void MovePlayer(IPlayer player, Int32 spacesToMove)
+        public void MoveToken(Token token, Int32 spacesToMove)
         {
-            player.Location = (player.Location + spacesToMove) % numberOfSpacesOnBoard;
+            token.Location = (token.Location + spacesToMove) % numberOfSpacesOnBoard;
         }
     }
 }

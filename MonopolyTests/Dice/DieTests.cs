@@ -1,38 +1,35 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Monopoly.Dice;
+using Monopoly.Random;
+using Moq;
 
 namespace MonopolyTests
 {
     [TestClass]
     public class DieTests
     {
-        private Random random;
+        private Mock<IRandom> mockRandom;
         private Int32 numberOfSides;
         private Die die;
 
         public DieTests()
         {
-            random = new Random();
+            mockRandom = new Mock<IRandom>();
             numberOfSides = 6;
-            die = new Die(random, numberOfSides);
+            die = new Die(mockRandom.Object, numberOfSides);
         }
 
         [TestMethod]
-        public void RollCanReturnEveryNumberBetweenOneAndNumberOfSidesInclusive()
+        public void RollCallsNextOnRandomAndReturnsTheValue()
         {
-            var timesToRoll = 1000;
-            var rolls = new Int32[6];
+            var minValueInclusive = 1;
+            var maxValueExclusive = 7;
+            mockRandom.Setup(r => r.Next(minValueInclusive, maxValueExclusive)).Returns(5);
 
-            for (var i = 0; i < timesToRoll; i++)
-            {
-                var roll = die.Roll();
-                var slotInZeroIndexedArray = roll - 1;
-                rolls[slotInZeroIndexedArray]++;
-            }
+            die.Roll();
 
-            Assert.IsTrue(rolls.All(r => r > 0));
+            mockRandom.VerifyAll();
         }
     }
 }

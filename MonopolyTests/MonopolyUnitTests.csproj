@@ -56,9 +56,12 @@
   <ItemGroup>
     <Compile Include="Dice\DiceRollerTests.cs" />
     <Compile Include="Dice\DieTests.cs" />
+    <Compile Include="GameTests.cs" />
     <Compile Include="MovementServiceTests.cs" />
     <Compile Include="PlayerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Random\RandomizerTests.cs" />
+    <Compile Include="Random\RandomTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
