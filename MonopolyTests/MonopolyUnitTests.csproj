@@ -56,10 +56,10 @@
   <ItemGroup>
     <Compile Include="Dice\DiceRollerTests.cs" />
     <Compile Include="Dice\DieTests.cs" />
-    <Compile Include="Events\GoToJailEventTests.cs" />
-    <Compile Include="Events\IncomeTaxEventTests.cs" />
-    <Compile Include="Events\NopEventTests.cs" />
-    <Compile Include="Events\PassGoEventTests.cs" />
+    <Compile Include="Commands\GoToJailCommandTests.cs" />
+    <Compile Include="Commands\IncomeTaxCommandTests.cs" />
+    <Compile Include="Commands\NullCommandTests.cs" />
+    <Compile Include="Commands\PassGoCommandTests.cs" />
     <Compile Include="Game\GameRunnerTests.cs" />
     <Compile Include="Game\GameValidatorTests.cs" />
     <Compile Include="Movement\MovementServiceTests.cs" />

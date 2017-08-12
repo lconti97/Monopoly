@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Monopoly.Events;
+using Monopoly.Commands;
 using Monopoly.Spaces;
 using Moq;
 
@@ -8,27 +8,27 @@ namespace MonopolyTests.Spaces
     [TestClass]
     public class GoSpaceTests
     {
-        private Mock<IPassGoEvent> mockPassGoEvent;
-        private Mock<INopEvent> mockNopEvent;
+        private Mock<IPassGoCommand> mockPassGoCommand;
+        private Mock<INullCommand> mockNopCommand;
         private GoSpace goSpace;
 
         public GoSpaceTests()
         {
-            mockPassGoEvent = new Mock<IPassGoEvent>();
-            mockNopEvent = new Mock<INopEvent>();
-            goSpace = new GoSpace(mockPassGoEvent.Object, mockNopEvent.Object);
+            mockPassGoCommand = new Mock<IPassGoCommand>();
+            mockNopCommand = new Mock<INullCommand>();
+            goSpace = new GoSpace(mockPassGoCommand.Object, mockNopCommand.Object);
         }
 
         [TestMethod]
-        public void ConstructorInitializesEnterSpaceEventToNewPassGoEvent()
+        public void ConstructorInitializesEnterSpaceCommandToNewPassGoCommand()
         {
-            Assert.AreEqual(mockPassGoEvent.Object, goSpace.EnterSpaceEvent);
+            Assert.AreEqual(mockPassGoCommand.Object, goSpace.EnterSpaceCommand);
         }
 
         [TestMethod]
-        public void ConstructorInitializesLandOnSpaceEventToNewNopEvent()
+        public void ConstructorInitializesLandOnSpaceCommandToNewNopCommand()
         {
-            Assert.AreEqual(mockNopEvent.Object, goSpace.LandOnSpaceEvent);
+            Assert.AreEqual(mockNopCommand.Object, goSpace.LandOnSpaceCommand);
         }
     }
 }

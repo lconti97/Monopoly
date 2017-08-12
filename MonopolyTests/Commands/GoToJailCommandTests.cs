@@ -1,30 +1,30 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Monopoly;
-using Monopoly.Events;
+using Monopoly.Commands;
 
-namespace MonopolyTests.Events
+namespace MonopolyTests.Commands
 {
     [TestClass]
-    public class GoToJailEventTests
+    public class GoToJailCommandTests
     {
         private Int32 jailSpaceIndex;
         private Player player;
         private GameBoard gameBoard;
-        private GoToJailEvent goToJailEvent;
+        private GoToJailCommand goToJailCommand;
 
-        public GoToJailEventTests()
+        public GoToJailCommandTests()
         {
             jailSpaceIndex = 3;
             player = new Player();
             gameBoard = new GameBoard();
-            goToJailEvent = new GoToJailEvent(jailSpaceIndex);
+            goToJailCommand = new GoToJailCommand(jailSpaceIndex);
         }
 
         [TestMethod]
         public void ActMovesPlayerToJailSpace()
         {
-            goToJailEvent.Act(player);
+            goToJailCommand.Execute(player);
 
             Assert.AreEqual(jailSpaceIndex, player.Location);
         }

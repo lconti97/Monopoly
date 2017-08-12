@@ -1,16 +1,16 @@
-﻿using Monopoly.Events;
+﻿using Monopoly.Commands;
 
 namespace Monopoly.Spaces
 {
     public class GenericSpace : ISpace
     {
-        public IEvent EnterSpaceEvent { get; private set; }
-        public IEvent LandOnSpaceEvent { get; private set; }
+        public ICommand EnterSpaceCommand { get; private set; }
+        public ICommand LandOnSpaceCommand { get; private set; }
 
-        public GenericSpace(INopEvent enterSpaceEvent, INopEvent landOnSpaceEvent)
+        public GenericSpace(INullCommand enterSpaceCommand, INullCommand landOnSpaceCommand)
         {
-            EnterSpaceEvent = enterSpaceEvent;
-            LandOnSpaceEvent = landOnSpaceEvent;
+            EnterSpaceCommand = enterSpaceCommand;
+            LandOnSpaceCommand = landOnSpaceCommand;
         }
     }
 }

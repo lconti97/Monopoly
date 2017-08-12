@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Monopoly.Events;
+using Monopoly.Commands;
 using Monopoly.Spaces;
 using Moq;
 
@@ -8,27 +8,27 @@ namespace MonopolyTests.Spaces
     [TestClass]
     public class GenericSpaceTests
     {
-        private Mock<INopEvent> mockNopEvent1;
-        private Mock<INopEvent> mockNopEvent2;
+        private Mock<INullCommand> mockNopCommand1;
+        private Mock<INullCommand> mockNopCommand2;
         private GenericSpace genericSpace;
 
         public GenericSpaceTests()
         {
-            mockNopEvent1 = new Mock<INopEvent>();
-            mockNopEvent2 = new Mock<INopEvent>();
-            genericSpace = new GenericSpace(mockNopEvent1.Object, mockNopEvent2.Object);
+            mockNopCommand1 = new Mock<INullCommand>();
+            mockNopCommand2 = new Mock<INullCommand>();
+            genericSpace = new GenericSpace(mockNopCommand1.Object, mockNopCommand2.Object);
         }
 
         [TestMethod]
-        public void ConstructorInitializesEnterSpaceEventToNopEvent()
+        public void ConstructorInitializesEnterSpaceCommandToNopCommand()
         {
-            Assert.AreEqual(mockNopEvent1.Object, genericSpace.EnterSpaceEvent);
+            Assert.AreEqual(mockNopCommand1.Object, genericSpace.EnterSpaceCommand);
         }
 
         [TestMethod]
-        public void ConstructorInitializesLandOnSpaceEventToNopEvent()
+        public void ConstructorInitializesLandOnSpaceCommandToNopCommand()
         {
-            Assert.AreEqual(mockNopEvent2.Object, genericSpace.LandOnSpaceEvent);
+            Assert.AreEqual(mockNopCommand2.Object, genericSpace.LandOnSpaceCommand);
         }
     }
 }

@@ -1,17 +1,16 @@
-﻿using System;
-using Monopoly.Events;
+﻿using Monopoly.Commands;
 
 namespace Monopoly.Spaces
 {
     public class IncomeTaxSpace : ISpace
     {
-        public IEvent EnterSpaceEvent { get; private set; }
-        public IEvent LandOnSpaceEvent { get; private set; }
+        public ICommand EnterSpaceCommand { get; private set; }
+        public ICommand LandOnSpaceCommand { get; private set; }
 
-        public IncomeTaxSpace(INopEvent enterSpaceEvent, IIncomeTaxEvent landOnSpaceEvent)
+        public IncomeTaxSpace(INullCommand enterSpaceCommand, IIncomeTaxCommand landOnSpaceCommand)
         {
-            EnterSpaceEvent = enterSpaceEvent;
-            LandOnSpaceEvent = landOnSpaceEvent;
+            EnterSpaceCommand = enterSpaceCommand;
+            LandOnSpaceCommand = landOnSpaceCommand;
         }
     }
 }

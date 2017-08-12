@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Monopoly.Events
+namespace Monopoly.Commands
 {
-    public interface IGoToJailEvent : IEvent
+    public interface IGoToJailCommand : ICommand
     {
     }
 }

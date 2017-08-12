@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Monopoly.Events;
+using Monopoly.Commands;
 using Monopoly.Spaces;
 using Moq;
 
@@ -8,27 +8,27 @@ namespace MonopolyTests.Spaces
     [TestClass]
     public class GoToJailSpaceTests
     {
-        private Mock<INopEvent> mockNopEvent;
-        private Mock<IGoToJailEvent> mockGoToJailEvent;
+        private Mock<INullCommand> mockNopCommand;
+        private Mock<IGoToJailCommand> mockGoToJailCommand;
         private GoToJailSpace goToJailSpace;
 
         public GoToJailSpaceTests()
         {
-            mockNopEvent = new Mock<INopEvent>();
-            mockGoToJailEvent = new Mock<IGoToJailEvent>();
-            goToJailSpace = new GoToJailSpace(mockNopEvent.Object, mockGoToJailEvent.Object);
+            mockNopCommand = new Mock<INullCommand>();
+            mockGoToJailCommand = new Mock<IGoToJailCommand>();
+            goToJailSpace = new GoToJailSpace(mockNopCommand.Object, mockGoToJailCommand.Object);
         }
 
         [TestMethod]
-        public void ConstructorInitializesEnterSpaceEventToNopEvent()
+        public void ConstructorInitializesEnterSpaceCommandToNopCommand()
         {
-            Assert.AreEqual(mockNopEvent.Object, goToJailSpace.EnterSpaceEvent);
+            Assert.AreEqual(mockNopCommand.Object, goToJailSpace.EnterSpaceCommand);
         }
 
         [TestMethod]
-        public void ConstructorInitializesLandOnSpaceEventToGoToJailEvent()
+        public void ConstructorInitializesLandOnSpaceCommandToGoToJailCommand()
         {
-            Assert.AreEqual(mockGoToJailEvent.Object, goToJailSpace.LandOnSpaceEvent);
+            Assert.AreEqual(mockGoToJailCommand.Object, goToJailSpace.LandOnSpaceCommand);
         }
     }
 }

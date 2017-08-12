@@ -1,17 +1,17 @@
 ﻿using System;
 
-namespace Monopoly.Events
+namespace Monopoly.Commands
 {
-    public class GoToJailEvent : IGoToJailEvent
+    public class GoToJailCommand : IGoToJailCommand
     {
         private Int32 jailLocation;
 
-        public GoToJailEvent(Int32 jailLocation)
+        public GoToJailCommand(Int32 jailLocation)
         {
             this.jailLocation = jailLocation;
         }
 
-        public void Act(Player player)
+        public void Execute(Player player)
         {
             player.Location = jailLocation;
         }

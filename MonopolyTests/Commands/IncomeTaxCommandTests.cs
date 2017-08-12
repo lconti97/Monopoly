@@ -1,24 +1,24 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Monopoly;
-using Monopoly.Events;
+using Monopoly.Commands;
 
-namespace MonopolyTests.Events
+namespace MonopolyTests.Commands
 {
     [TestClass]
-    public class IncomeTaxEventTests
+    public class IncomeTaxCommandTests
     {
         private Int32 maxDeduction = 200;
         private Int32 incomeTaxPercentage = 10;
         private Player player;
         private GameBoard gameBoard;
-        private IncomeTaxEvent incomeTaxEvent;
+        private IncomeTaxCommand incomeTaxCommand;
 
-        public IncomeTaxEventTests()
+        public IncomeTaxCommandTests()
         {
             player = new Player();
             gameBoard = new GameBoard();
-            incomeTaxEvent = new IncomeTaxEvent(maxDeduction, incomeTaxPercentage);
+            incomeTaxCommand = new IncomeTaxCommand(maxDeduction, incomeTaxPercentage);
         }
 
         [TestMethod]
@@ -27,7 +27,7 @@ namespace MonopolyTests.Events
             var initialBalance = 1800;
             player.Balance = initialBalance;
 
-            incomeTaxEvent.Act(player);
+            incomeTaxCommand.Execute(player);
 
             var expectedDeduction = initialBalance / 10;
             var expectedBalance = initialBalance - expectedDeduction;
@@ -40,7 +40,7 @@ namespace MonopolyTests.Events
             var initialBalance = 2200;
             player.Balance = initialBalance;
 
-            incomeTaxEvent.Act(player);
+            incomeTaxCommand.Execute(player);
 
             var expectedDeduction = maxDeduction;
             var expectedBalance = initialBalance - expectedDeduction;
@@ -53,7 +53,7 @@ namespace MonopolyTests.Events
             var initialBalance = 0;
             player.Balance = initialBalance;
 
-            incomeTaxEvent.Act(player);
+            incomeTaxCommand.Execute(player);
 
             Assert.AreEqual(initialBalance, player.Balance);
         }
@@ -64,7 +64,7 @@ namespace MonopolyTests.Events
             var initialBalance = 2000;
             player.Balance = initialBalance;
 
-            incomeTaxEvent.Act(player);
+            incomeTaxCommand.Execute(player);
 
             var expectedDeduction = maxDeduction;
             var expectedBalance = initialBalance - expectedDeduction;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Monopoly;
-using Monopoly.Events;
+using Monopoly.Commands;
 using Monopoly.Movement;
 using Monopoly.Spaces;
 using Moq;
@@ -14,8 +14,8 @@ namespace MonopolyTests.Movement
     {
         private Int32 numberOfSpaces;
         private GameBoard gameBoard;
-        private Mock<INopEvent> mockEnterSpaceEvent;
-        private Mock<INopEvent> mockLandOnSpaceEvent;
+        private Mock<INullCommand> mockEnterSpaceCommand;
+        private Mock<INullCommand> mockLandOnSpaceCommand;
         private Player player;
         private MovementService movementService;
 
@@ -23,8 +23,8 @@ namespace MonopolyTests.Movement
         {
             numberOfSpaces = 40;
             gameBoard = new GameBoard();
-            mockEnterSpaceEvent = new Mock<INopEvent>();
-            mockLandOnSpaceEvent = new Mock<INopEvent>();
+            mockEnterSpaceCommand = new Mock<INullCommand>();
+            mockLandOnSpaceCommand = new Mock<INullCommand>();
             player = new Player();
             movementService = new MovementService(gameBoard);
         }
@@ -40,7 +40,7 @@ namespace MonopolyTests.Movement
             var spaces = new List<ISpace>();
 
             for (int i = 0; i < numberOfSpaces; i++)
-                spaces.Add(new GenericSpace(mockEnterSpaceEvent.Object, mockLandOnSpaceEvent.Object));
+                spaces.Add(new GenericSpace(mockEnterSpaceCommand.Object, mockLandOnSpaceCommand.Object));
 
             return spaces;
         }
@@ -71,23 +71,23 @@ namespace MonopolyTests.Movement
         }
 
         [TestMethod]
-        public void MovePlayerCallsActOnEnterSpaceEventForEachSpaceThePlayerEnters()
+        public void MovePlayerCallsActOnEnterSpaceCommandForEachSpaceThePlayerEnters()
         {
             var spacesToMove = 3;
 
             movementService.MovePlayer(player, spacesToMove);
 
-            mockEnterSpaceEvent.Verify(e => e.Act(player), Times.Exactly(spacesToMove));
+            mockEnterSpaceCommand.Verify(e => e.Execute(player), Times.Exactly(spacesToMove));
         }
 
         [TestMethod]
-        public void MovePlayerCallsActOnLastSpaceLandOnEvent()
+        public void MovePlayerCallsActOnLastSpaceLandOnCommand()
         {
             var spacesToMove = 3;
 
             movementService.MovePlayer(player, spacesToMove);
 
-            mockLandOnSpaceEvent.Verify(e => e.Act(player), Times.Once());
+            mockLandOnSpaceCommand.Verify(e => e.Execute(player), Times.Once());
         }
     }
 }

@@ -1,17 +1,17 @@
 ﻿using System;
 
-namespace Monopoly.Events
+namespace Monopoly.Commands
 {
-    public class PassGoEvent : IPassGoEvent
+    public class PassGoCommand : IPassGoCommand
     {
         private Int32 passGoPay;
 
-        public PassGoEvent(Int32 passGoPay)
+        public PassGoCommand(Int32 passGoPay)
         {
             this.passGoPay = passGoPay;
         }
 
-        public void Act(Player player)
+        public void Execute(Player player)
         {
             player.Balance += passGoPay;
         }

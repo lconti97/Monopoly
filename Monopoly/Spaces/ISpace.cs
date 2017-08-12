@@ -1,10 +1,10 @@
-﻿using Monopoly.Events;
+﻿using Monopoly.Commands;
 
 namespace Monopoly.Spaces
 {
     public interface ISpace
     {
-        IEvent EnterSpaceEvent { get; }
-        IEvent LandOnSpaceEvent { get; }
+        ICommand EnterSpaceCommand { get; }
+        ICommand LandOnSpaceCommand { get; }
     }
 }

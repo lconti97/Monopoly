@@ -1,17 +1,17 @@
-﻿using Monopoly.Events;
+﻿using Monopoly.Commands;
 
 namespace Monopoly.Spaces
 {
     public class GoSpace : ISpace
     {
-        public IEvent EnterSpaceEvent { get; private set; }
+        public ICommand EnterSpaceCommand { get; private set; }
 
-        public IEvent LandOnSpaceEvent { get; private set; }
+        public ICommand LandOnSpaceCommand { get; private set; }
 
-        public GoSpace(IPassGoEvent enterSpaceEvent, INopEvent landOnSpaceEvent)
+        public GoSpace(IPassGoCommand enterSpaceCommand, INullCommand landOnSpaceCommand)
         {
-            EnterSpaceEvent = enterSpaceEvent;
-            LandOnSpaceEvent = landOnSpaceEvent;
+            EnterSpaceCommand = enterSpaceCommand;
+            LandOnSpaceCommand = landOnSpaceCommand;
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Monopoly.Events;
+using Monopoly.Commands;
 using Monopoly.Spaces;
 using Moq;
 
@@ -8,27 +8,27 @@ namespace MonopolyTests.Spaces
     [TestClass]
     public class IncomeTaxSpaceTests
     {
-        private Mock<INopEvent> mockNopEvent;
-        private Mock<IIncomeTaxEvent> mockIncomeTaxEvent;
+        private Mock<INullCommand> mockNopCommand;
+        private Mock<IIncomeTaxCommand> mockIncomeTaxCommand;
         private IncomeTaxSpace incomeTaxSpace;
 
         public IncomeTaxSpaceTests()
         {
-            mockNopEvent = new Mock<INopEvent>();
-            mockIncomeTaxEvent = new Mock<IIncomeTaxEvent>();
-            incomeTaxSpace = new IncomeTaxSpace(mockNopEvent.Object, mockIncomeTaxEvent.Object);
+            mockNopCommand = new Mock<INullCommand>();
+            mockIncomeTaxCommand = new Mock<IIncomeTaxCommand>();
+            incomeTaxSpace = new IncomeTaxSpace(mockNopCommand.Object, mockIncomeTaxCommand.Object);
         }
 
         [TestMethod]
-        public void ConstructorInitializesEnterSpaceEventToNopEvent()
+        public void ConstructorInitializesEnterSpaceCommandToNopCommand()
         {
-            Assert.AreEqual(mockNopEvent.Object, incomeTaxSpace.EnterSpaceEvent);
+            Assert.AreEqual(mockNopCommand.Object, incomeTaxSpace.EnterSpaceCommand);
         }
 
         [TestMethod]
-        public void ConstructorInitializesLandOnSpaceEventToGoToJailEvent()
+        public void ConstructorInitializesLandOnSpaceCommandToGoToJailCommand()
         {
-            Assert.AreEqual(mockIncomeTaxEvent.Object, incomeTaxSpace.LandOnSpaceEvent);
+            Assert.AreEqual(mockIncomeTaxCommand.Object, incomeTaxSpace.LandOnSpaceCommand);
         }
     }
 }

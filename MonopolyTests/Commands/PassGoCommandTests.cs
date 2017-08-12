@@ -1,22 +1,22 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Monopoly;
-using Monopoly.Events;
+using Monopoly.Commands;
 
-namespace MonopolyTests.Events
+namespace MonopolyTests.Commands
 {
     [TestClass]
-    public class PassGoEventTests
+    public class PassGoCommandTests
     {
         private Int32 passGoPay;
         private Player player;
-        private PassGoEvent passGoEvent;
+        private PassGoCommand passGoCommand;
 
-        public PassGoEventTests()
+        public PassGoCommandTests()
         {
             passGoPay = 200;
             player = new Player();
-            passGoEvent = new PassGoEvent(passGoPay);
+            passGoCommand = new PassGoCommand(passGoPay);
         }
 
         [TestMethod]
@@ -25,7 +25,7 @@ namespace MonopolyTests.Events
             var initialBalance = 100;
             player.Balance = initialBalance;
 
-            passGoEvent.Act(player);
+            passGoCommand.Execute(player);
 
             var expectedBalance = initialBalance + passGoPay;
             Assert.AreEqual(expectedBalance, player.Balance);
