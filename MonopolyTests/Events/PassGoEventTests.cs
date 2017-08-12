@@ -25,7 +25,7 @@ namespace MonopolyTests.Events
             var initialBalance = 100;
             player.Balance = initialBalance;
 
-            passGoEvent.Act(player, null);
+            passGoEvent.Act(player);
 
             var expectedBalance = initialBalance + passGoPay;
             Assert.AreEqual(expectedBalance, player.Balance);

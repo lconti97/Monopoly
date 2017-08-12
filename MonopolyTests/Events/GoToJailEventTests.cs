@@ -24,7 +24,7 @@ namespace MonopolyTests.Events
         [TestMethod]
         public void ActMovesPlayerToJailSpace()
         {
-            goToJailEvent.Act(player, gameBoard);
+            goToJailEvent.Act(player);
 
             Assert.AreEqual(jailSpaceIndex, player.Location);
         }

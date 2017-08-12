@@ -27,7 +27,7 @@ namespace MonopolyTests.Events
             var initialBalance = 1800;
             player.Balance = initialBalance;
 
-            incomeTaxEvent.Act(player, gameBoard);
+            incomeTaxEvent.Act(player);
 
             var expectedDeduction = initialBalance / 10;
             var expectedBalance = initialBalance - expectedDeduction;
@@ -40,7 +40,7 @@ namespace MonopolyTests.Events
             var initialBalance = 2200;
             player.Balance = initialBalance;
 
-            incomeTaxEvent.Act(player, gameBoard);
+            incomeTaxEvent.Act(player);
 
             var expectedDeduction = maxDeduction;
             var expectedBalance = initialBalance - expectedDeduction;
@@ -53,7 +53,7 @@ namespace MonopolyTests.Events
             var initialBalance = 0;
             player.Balance = initialBalance;
 
-            incomeTaxEvent.Act(player, gameBoard);
+            incomeTaxEvent.Act(player);
 
             Assert.AreEqual(initialBalance, player.Balance);
         }
@@ -64,7 +64,7 @@ namespace MonopolyTests.Events
             var initialBalance = 2000;
             player.Balance = initialBalance;
 
-            incomeTaxEvent.Act(player, gameBoard);
+            incomeTaxEvent.Act(player);
 
             var expectedDeduction = maxDeduction;
             var expectedBalance = initialBalance - expectedDeduction;

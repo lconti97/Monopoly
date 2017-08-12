@@ -15,7 +15,7 @@ namespace Monopoly.Events
             incomeTaxDecimal = incomeTaxPercentage / 100.0;
         }
 
-        public void Act(Player player, GameBoard gameBoard)
+        public void Act(Player player)
         {
             var tenPercentOfBalanceRoundedDown = (Int32)(player.Balance * incomeTaxDecimal);
             if (tenPercentOfBalanceRoundedDown > maxDeduction)

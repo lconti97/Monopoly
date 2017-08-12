@@ -77,7 +77,7 @@ namespace MonopolyTests.Movement
 
             movementService.MovePlayer(player, spacesToMove);
 
-            mockEnterSpaceEvent.Verify(e => e.Act(player, gameBoard), Times.Exactly(spacesToMove));
+            mockEnterSpaceEvent.Verify(e => e.Act(player), Times.Exactly(spacesToMove));
         }
 
         [TestMethod]
@@ -87,7 +87,7 @@ namespace MonopolyTests.Movement
 
             movementService.MovePlayer(player, spacesToMove);
 
-            mockLandOnSpaceEvent.Verify(e => e.Act(player, gameBoard), Times.Once());
+            mockLandOnSpaceEvent.Verify(e => e.Act(player), Times.Once());
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Monopoly.Events
             this.jailLocation = jailLocation;
         }
 
-        public void Act(Player player, GameBoard gameBoard)
+        public void Act(Player player)
         {
             player.Location = jailLocation;
         }

@@ -11,7 +11,7 @@ namespace Monopoly.Events
             this.passGoPay = passGoPay;
         }
 
-        public void Act(Player player, GameBoard gameBoard)
+        public void Act(Player player)
         {
             player.Balance += passGoPay;
         }
