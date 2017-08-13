@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Monopoly.Commands;
+using Monopoly.CommandFactories;
 using Monopoly.Spaces;
 using Moq;
 
@@ -8,27 +8,27 @@ namespace MonopolyTests.Spaces
     [TestClass]
     public class GoToJailSpaceTests
     {
-        private Mock<INullCommand> mockNopCommand;
-        private Mock<IGoToJailCommand> mockGoToJailCommand;
+        private Mock<INullCommandFactory> mockNopCommandFactory;
+        private Mock<IGoToJailCommandFactory> mockGoToJailCommandFactory;
         private GoToJailSpace goToJailSpace;
 
         public GoToJailSpaceTests()
         {
-            mockNopCommand = new Mock<INullCommand>();
-            mockGoToJailCommand = new Mock<IGoToJailCommand>();
-            goToJailSpace = new GoToJailSpace(mockNopCommand.Object, mockGoToJailCommand.Object);
+            mockNopCommandFactory = new Mock<INullCommandFactory>();
+            mockGoToJailCommandFactory = new Mock<IGoToJailCommandFactory>();
+            goToJailSpace = new GoToJailSpace(mockNopCommandFactory.Object, mockGoToJailCommandFactory.Object);
         }
 
         [TestMethod]
-        public void ConstructorInitializesEnterSpaceCommandToNopCommand()
+        public void ConstructorInitializesEnterSpaceCommandFactoryToNopCommandFactory()
         {
-            Assert.AreEqual(mockNopCommand.Object, goToJailSpace.EnterSpaceCommand);
+            Assert.AreEqual(mockNopCommandFactory.Object, goToJailSpace.EnterSpaceCommandFactory);
         }
 
         [TestMethod]
-        public void ConstructorInitializesLandOnSpaceCommandToGoToJailCommand()
+        public void ConstructorInitializesLandOnSpaceCommandFactoryToGoToJailCommandFactory()
         {
-            Assert.AreEqual(mockGoToJailCommand.Object, goToJailSpace.LandOnSpaceCommand);
+            Assert.AreEqual(mockGoToJailCommandFactory.Object, goToJailSpace.LandOnSpaceCommandFactory);
         }
     }
 }

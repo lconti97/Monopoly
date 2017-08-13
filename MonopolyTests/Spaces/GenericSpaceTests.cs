@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Monopoly.Commands;
+using Monopoly.CommandFactories;
 using Monopoly.Spaces;
 using Moq;
 
@@ -8,27 +8,27 @@ namespace MonopolyTests.Spaces
     [TestClass]
     public class GenericSpaceTests
     {
-        private Mock<INullCommand> mockNopCommand1;
-        private Mock<INullCommand> mockNopCommand2;
+        private Mock<INullCommandFactory> mockNopCommandFactory1;
+        private Mock<INullCommandFactory> mockNopCommandFactory2;
         private GenericSpace genericSpace;
 
         public GenericSpaceTests()
         {
-            mockNopCommand1 = new Mock<INullCommand>();
-            mockNopCommand2 = new Mock<INullCommand>();
-            genericSpace = new GenericSpace(mockNopCommand1.Object, mockNopCommand2.Object);
+            mockNopCommandFactory1 = new Mock<INullCommandFactory>();
+            mockNopCommandFactory2 = new Mock<INullCommandFactory>();
+            genericSpace = new GenericSpace(mockNopCommandFactory1.Object, mockNopCommandFactory2.Object);
         }
 
         [TestMethod]
-        public void ConstructorInitializesEnterSpaceCommandToNopCommand()
+        public void ConstructorInitializesEnterSpaceCommandFactoryToNopCommandFactory()
         {
-            Assert.AreEqual(mockNopCommand1.Object, genericSpace.EnterSpaceCommand);
+            Assert.AreEqual(mockNopCommandFactory1.Object, genericSpace.EnterSpaceCommandFactory);
         }
 
         [TestMethod]
-        public void ConstructorInitializesLandOnSpaceCommandToNopCommand()
+        public void ConstructorInitializesLandOnSpaceCommandFactoryToNopCommandFactory()
         {
-            Assert.AreEqual(mockNopCommand2.Object, genericSpace.LandOnSpaceCommand);
+            Assert.AreEqual(mockNopCommandFactory2.Object, genericSpace.LandOnSpaceCommandFactory);
         }
     }
 }

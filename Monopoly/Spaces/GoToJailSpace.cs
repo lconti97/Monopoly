@@ -1,16 +1,16 @@
-﻿using Monopoly.Commands;
+﻿using Monopoly.CommandFactories;
 
 namespace Monopoly.Spaces
 {
     public class GoToJailSpace : ISpace
     {
-        public ICommand EnterSpaceCommand { get; private set; }
-        public ICommand LandOnSpaceCommand { get; private set; }
+        public ICommandFactory EnterSpaceCommandFactory { get; private set; }
+        public ICommandFactory LandOnSpaceCommandFactory { get; private set; }
 
-        public GoToJailSpace(INullCommand enterSpaceCommand, IGoToJailCommand landOnSpaceCommand)
+        public GoToJailSpace(INullCommandFactory enterSpaceCommandFactory, IGoToJailCommandFactory landOnSpaceCommandFactory)
         {
-            EnterSpaceCommand = enterSpaceCommand;
-            LandOnSpaceCommand = landOnSpaceCommand;
+            EnterSpaceCommandFactory = enterSpaceCommandFactory;
+            LandOnSpaceCommandFactory = landOnSpaceCommandFactory;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace MonopolyTests.Commands
         [TestMethod]
         public void ActIsImplemented()
         {
-            nullCommand.Execute(null);
+            nullCommand.Execute();
         }
     }
 }

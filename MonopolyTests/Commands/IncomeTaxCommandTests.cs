@@ -18,7 +18,7 @@ namespace MonopolyTests.Commands
         {
             player = new Player();
             gameBoard = new GameBoard();
-            incomeTaxCommand = new IncomeTaxCommand(maxDeduction, incomeTaxPercentage);
+            incomeTaxCommand = new IncomeTaxCommand(player, maxDeduction, incomeTaxPercentage);
         }
 
         [TestMethod]
@@ -27,7 +27,7 @@ namespace MonopolyTests.Commands
             var initialBalance = 1800;
             player.Balance = initialBalance;
 
-            incomeTaxCommand.Execute(player);
+            incomeTaxCommand.Execute();
 
             var expectedDeduction = initialBalance / 10;
             var expectedBalance = initialBalance - expectedDeduction;
@@ -40,7 +40,7 @@ namespace MonopolyTests.Commands
             var initialBalance = 2200;
             player.Balance = initialBalance;
 
-            incomeTaxCommand.Execute(player);
+            incomeTaxCommand.Execute();
 
             var expectedDeduction = maxDeduction;
             var expectedBalance = initialBalance - expectedDeduction;
@@ -53,7 +53,7 @@ namespace MonopolyTests.Commands
             var initialBalance = 0;
             player.Balance = initialBalance;
 
-            incomeTaxCommand.Execute(player);
+            incomeTaxCommand.Execute();
 
             Assert.AreEqual(initialBalance, player.Balance);
         }
@@ -64,7 +64,7 @@ namespace MonopolyTests.Commands
             var initialBalance = 2000;
             player.Balance = initialBalance;
 
-            incomeTaxCommand.Execute(player);
+            incomeTaxCommand.Execute();
 
             var expectedDeduction = maxDeduction;
             var expectedBalance = initialBalance - expectedDeduction;

@@ -1,16 +1,16 @@
-﻿using Monopoly.Commands;
+﻿using Monopoly.CommandFactories;
 
 namespace Monopoly.Spaces
 {
     public class IncomeTaxSpace : ISpace
     {
-        public ICommand EnterSpaceCommand { get; private set; }
-        public ICommand LandOnSpaceCommand { get; private set; }
+        public ICommandFactory EnterSpaceCommandFactory { get; private set; }
+        public ICommandFactory LandOnSpaceCommandFactory { get; private set; }
 
-        public IncomeTaxSpace(INullCommand enterSpaceCommand, IIncomeTaxCommand landOnSpaceCommand)
+        public IncomeTaxSpace(INullCommandFactory enterSpaceCommandFactory, IIncomeTaxCommandFactory landOnSpaceCommandFactory)
         {
-            EnterSpaceCommand = enterSpaceCommand;
-            LandOnSpaceCommand = landOnSpaceCommand;
+            EnterSpaceCommandFactory = enterSpaceCommandFactory;
+            LandOnSpaceCommandFactory = landOnSpaceCommandFactory;
         }
     }
 }

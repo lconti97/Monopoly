@@ -19,7 +19,8 @@ namespace Monopoly.Movement
                 AdvancePlayerByOneSpace(player);
 
             var currentSpace = GetCurrentSpace(player, gameBoard);
-            currentSpace.LandOnSpaceCommand.Execute(player);
+            var landOnSpaceCommand = currentSpace.LandOnSpaceCommandFactory.Create(player);
+            landOnSpaceCommand.Execute();
         }
 
         private ISpace GetCurrentSpace(Player player, GameBoard gameBoard)
@@ -31,8 +32,8 @@ namespace Monopoly.Movement
         {
             player.Location = (player.Location + 1) % gameBoard.Spaces.Count();
             var currentSpace = GetCurrentSpace(player, gameBoard);
-            var enterSpaceCommand = currentSpace.EnterSpaceCommand;
-            enterSpaceCommand.Execute(player);
+            var enterSpaceCommand = currentSpace.EnterSpaceCommandFactory.Create(player);
+            enterSpaceCommand.Execute();
         }
     }
 }

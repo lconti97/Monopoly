@@ -1,10 +1,10 @@
-﻿using Monopoly.Commands;
+﻿using Monopoly.CommandFactories;
 
 namespace Monopoly.Spaces
 {
     public interface ISpace
     {
-        ICommand EnterSpaceCommand { get; }
-        ICommand LandOnSpaceCommand { get; }
+        ICommandFactory EnterSpaceCommandFactory { get; }
+        ICommandFactory LandOnSpaceCommandFactory { get; }
     }
 }

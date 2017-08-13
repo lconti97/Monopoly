@@ -16,7 +16,7 @@ namespace MonopolyTests.Commands
         {
             passGoPay = 200;
             player = new Player();
-            passGoCommand = new PassGoCommand(passGoPay);
+            passGoCommand = new PassGoCommand(player, passGoPay);
         }
 
         [TestMethod]
@@ -25,7 +25,7 @@ namespace MonopolyTests.Commands
             var initialBalance = 100;
             player.Balance = initialBalance;
 
-            passGoCommand.Execute(player);
+            passGoCommand.Execute();
 
             var expectedBalance = initialBalance + passGoPay;
             Assert.AreEqual(expectedBalance, player.Balance);

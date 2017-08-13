@@ -18,13 +18,13 @@ namespace MonopolyTests.Commands
             jailSpaceIndex = 3;
             player = new Player();
             gameBoard = new GameBoard();
-            goToJailCommand = new GoToJailCommand(jailSpaceIndex);
+            goToJailCommand = new GoToJailCommand(player, jailSpaceIndex);
         }
 
         [TestMethod]
         public void ActMovesPlayerToJailSpace()
         {
-            goToJailCommand.Execute(player);
+            goToJailCommand.Execute();
 
             Assert.AreEqual(jailSpaceIndex, player.Location);
         }

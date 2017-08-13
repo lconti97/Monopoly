@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Monopoly;
+using Monopoly.CommandFactories;
 using Monopoly.Commands;
 using Monopoly.Movement;
 using Monopoly.Spaces;
@@ -14,8 +15,10 @@ namespace MonopolyTests.Movement
     {
         private Int32 numberOfSpaces;
         private GameBoard gameBoard;
-        private Mock<INullCommand> mockEnterSpaceCommand;
-        private Mock<INullCommand> mockLandOnSpaceCommand;
+        private Mock<INullCommandFactory> mockEnterSpaceCommandFactory;
+        private Mock<INullCommandFactory> mockLandOnSpaceCommandFactory;
+        private Mock<INullCommand> mockEnterSpaceNullCommand;
+        private Mock<INullCommand> mockLandOnSpaceNullCommand;
         private Player player;
         private MovementService movementService;
 
@@ -23,8 +26,10 @@ namespace MonopolyTests.Movement
         {
             numberOfSpaces = 40;
             gameBoard = new GameBoard();
-            mockEnterSpaceCommand = new Mock<INullCommand>();
-            mockLandOnSpaceCommand = new Mock<INullCommand>();
+            mockEnterSpaceCommandFactory = new Mock<INullCommandFactory>();
+            mockLandOnSpaceCommandFactory = new Mock<INullCommandFactory>();
+            mockEnterSpaceNullCommand = new Mock<INullCommand>();
+            mockLandOnSpaceNullCommand = new Mock<INullCommand>();
             player = new Player();
             movementService = new MovementService(gameBoard);
         }
@@ -33,6 +38,8 @@ namespace MonopolyTests.Movement
         public void Setup()
         {
             gameBoard.Spaces = CreateGenericSpaces(numberOfSpaces);
+            mockEnterSpaceCommandFactory.Setup(f => f.Create(player)).Returns(mockEnterSpaceNullCommand.Object);
+            mockLandOnSpaceCommandFactory.Setup(f => f.Create(player)).Returns(mockLandOnSpaceNullCommand.Object);
         }
 
         private IEnumerable<ISpace> CreateGenericSpaces(Int32 numberOfSpaces)
@@ -40,7 +47,7 @@ namespace MonopolyTests.Movement
             var spaces = new List<ISpace>();
 
             for (int i = 0; i < numberOfSpaces; i++)
-                spaces.Add(new GenericSpace(mockEnterSpaceCommand.Object, mockLandOnSpaceCommand.Object));
+                spaces.Add(new GenericSpace(mockEnterSpaceCommandFactory.Object, mockLandOnSpaceCommandFactory.Object));
 
             return spaces;
         }
@@ -77,7 +84,8 @@ namespace MonopolyTests.Movement
 
             movementService.MovePlayer(player, spacesToMove);
 
-            mockEnterSpaceCommand.Verify(e => e.Execute(player), Times.Exactly(spacesToMove));
+            mockEnterSpaceCommandFactory.Verify(e => e.Create(player), Times.Exactly(spacesToMove));
+            mockEnterSpaceNullCommand.Verify(c => c.Execute(), Times.Exactly(spacesToMove));
         }
 
         [TestMethod]
@@ -87,7 +95,8 @@ namespace MonopolyTests.Movement
 
             movementService.MovePlayer(player, spacesToMove);
 
-            mockLandOnSpaceCommand.Verify(e => e.Execute(player), Times.Once());
+            mockLandOnSpaceCommandFactory.Verify(f => f.Create(player), Times.Once());
+            mockLandOnSpaceNullCommand.Verify(c => c.Execute(), Times.Once());
         }
     }
 }
